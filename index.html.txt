@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Leave Review</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h2>Share Your Experience ⭐</h2>
+
+<textarea id="reviewBox"></textarea>
+
+<br>
+
+<button onclick="leaveReview()">Leave Review</button>
+<button onclick="generateReview()">Change Review</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+const business = "Jenifer Decor"
+
+async function generateReview(){
+
+const response = await fetch("/generate-review",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({business})
+
+})
+
+const data = await response.json()
+
+document.getElementById("reviewBox").value = data.review
+
+}
+
+function leaveReview(){
+
+const text = document.getElementById("reviewBox").value
+
+navigator.clipboard.writeText(text)
+
+window.location.href="https://search.google.com/local/writereview?placeid=PLACE_ID"
+
+}
+
+generateReview()

@@ -1,0 +1,48 @@
+import express from "express"
+import cors from "cors"
+import dotenv from "dotenv"
+import OpenAI from "openai"
+
+dotenv.config()
+
+const app = express()
+
+app.use(cors())
+app.use(express.json())
+app.use(express.static("public"))
+
+const openai = new OpenAI({
+ apiKey: process.env.OPENAI_API_KEY
+})
+
+app.post("/generate-review", async (req,res)=>{
+
+ const {business} = req.body
+
+ try{
+
+ const completion = await openai.chat.completions.create({
+ model:"gpt-4o-mini",
+ messages:[
+ {
+ role:"user",
+ content:`Write a short natural Google review for ${business}. Mention service and quality.`
+ }
+ ]
+ })
+
+ const review = completion.choices[0].message.content
+
+ res.json({review})
+
+ }catch(err){
+
+ res.json({review:"Amazing service and great experience. Highly recommended!"})
+
+ }
+
+})
+
+app.listen(3000,()=>{
+ console.log("Server running on port 3000")
+})
